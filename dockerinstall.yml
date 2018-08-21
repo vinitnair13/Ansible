@@ -1,0 +1,30 @@
+---
+- name: SETTING UP A REPOSITORY FOR DOCKER.
+  hosts: myhosts
+  user: root
+  sudo: no
+
+  tasks:
+    - name: Setting up a repository for docker.
+      shell: sudo yum install -y yum-utils \ device-mapper-persistent-data \ lvm2
+      register: result
+    - debug:
+        var: result
+
+    - name: Set up the stable repository
+      shell: sudo yum-config-manager \ --add-repo \ https://download.docker.com/linux/centos/docker-ce.repo
+      register: result
+    - debug:
+        var: result
+
+    - name: Installing Docker
+      shell: sudo yum -y install docker-ce
+      register: result
+    - debug:
+        var: result
+
+    - name: Installing Docker
+      shell: sudo yum -y install docker-ce
+      register: result
+    - debug:
+        var: result
