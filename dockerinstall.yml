@@ -1,5 +1,5 @@
 ---
-- name: SETTING UP A REPOSITORY FOR DOCKER.
+- name: Docker Install.
   hosts: myhosts
   user: root
   sudo: no
