@@ -1,0 +1,60 @@
+---
+- name: Gitlab Install.
+  hosts: myhosts
+  user: root
+  sudo: no
+
+  tasks:
+    - name: Update the packages
+      shell: yum update â€“y
+      register: result
+    - debug:
+        var: result
+
+    - name: Installing postfix
+      shell: yum install postfix -y
+      register: result
+    - debug:
+        var: result
+
+    - name: Start postfix
+      shell: systemctl start postfix
+      register: result
+    - debug:
+        var: result
+
+    - name: Enabling postfix service
+      shell: systemctl enable postfix
+      register: result
+    - debug:
+        var: result
+
+    - name: Installing policycore-utils
+      shell: yum install curl policycoreutils -y
+      register: result
+    - debug:
+        var: result
+
+    - name: download the script file
+      shell: wget https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh
+      register: result
+    - debug:
+        var: result
+
+    - name: Run the script file
+      shell: bash script.rpm.sh
+      register: result
+    - debug:
+        var: result
+
+    - name: intall gitlab-ce
+      shell: yum -y install gitlab-ce
+      register: result
+    - debug:
+        var: result
+
+    - name: GitLab initial configuration
+      shell: gitlab-ctl reconfigure
+      register: result
+    - debug:
+        var: result
